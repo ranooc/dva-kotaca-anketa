@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dva kotača malo jača · Rezultati upitnika</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--n:#1E1E58;--r:#DF494A;--y:#FAA719;--t:#1BA990;--soft:#F3F2FA}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:500 16px/1.5 Manrope,system-ui,sans-serif;color:var(--n);background:var(--soft)}
+.top{background:var(--n);color:#fff;padding:28px max(5vw,16px)}
+.top .in{max-width:1000px;margin:0 auto;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.top img{height:70px}
+h1,h2{font-family:Unbounded,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.1}
+h1{font-size:clamp(26px,4vw,40px)}
+.big{display:flex;gap:28px;flex-wrap:wrap;margin-top:10px}
+.big div{font:900 clamp(28px,5vw,44px)/1 Unbounded;color:var(--y)}
+.big small{display:block;font:700 13px Manrope;color:#fff;opacity:.8;margin-top:6px}
+main{max-width:1000px;margin:0 auto;padding:24px max(5vw,16px) 48px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+.q{background:#fff;border-radius:24px;padding:20px}
+h2{font-size:16px;margin-bottom:14px;line-height:1.25}
+.row{margin-bottom:10px}
+.row .l{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-weight:700}
+.row .l b{white-space:nowrap}
+.bar{height:12px;background:var(--soft);border-radius:99px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;border-radius:99px;background:var(--t)}
+.note{font-size:13px;color:#55557F;max-width:1000px;margin:0 auto;padding:0 max(5vw,16px) 40px}
+button{font:800 14px Manrope;background:#fff;color:var(--n);border:3px solid #fff;border-radius:99px;padding:10px 18px;cursor:pointer;min-height:44px}
+.err{grid-column:1/-1;background:#fff;border-radius:20px;padding:20px;font-weight:700}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div><h1>Rezultati upitnika</h1>
+  <div class="big"><div id="tot">–<small>odgovora</small></div><div id="a3">–<small>prosjek radionice /5</small></div><div id="a4">–<small>prosjek poligona /5</small></div><div id="hel">–<small>sigurno ili vjerojatno nosi kacigu</small></div></div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px"><img src="logo-inverzni.png" alt="Dva kotača malo jača"><button id="ref">Osvježi</button></div>
+</div></header>
+<main id="m"></main>
+<p class="note">Zbirni podaci uživo iz baze. Pojedinačni odgovori i komentari nisu javni; čitaju se u Supabase tablici dkmj_odgovori.</p>
+<script>
+{
+const SB_URL='https://unszfujweobuseqzfvjr.supabase.co',SB_KEY='sb_publishable_F95tc2G0TRx4M7pOyHdrQg_u0cjvrH2';
+const Q={q1:['Koliko često voziš romobil?',['Skoro svaki dan','Povremeno','Par puta od frendova','Nikad dosad']],
+q2:['Kaciga dosad',['Uvijek na glavi','Tu i tamo','Doma skuplja prašinu','Nemam / ne nosim']],
+q3:['Prvi dio (radionica), ocjena',['1','2','3','4','5']],
+q4:['Poligon, ocjena',['1','2','3','4','5']],
+q5:['Najbolji zadatak na poligonu (više odgovora)',['Brzo stavljanje opreme','Slalom i štafeta','STOP i zebra','Kviz']],
+q6:['Novo pravilo ili kazna?',['Da, hrpu novih stvari','Da, par detalja','Sve sam već znao/la']],
+q7:['Promjena pogleda na vožnju',['Skroz','Dosta','Malo','Nimalo']],
+q8:['Nošenje kacige ubuduće',['Sigurno (100 %)','Najvjerojatnije da','Nisam siguran/na','Teško']],
+q9:['Glavna poruka (više odgovora)',['Kaciga spašava glavu','Nema vožnje u dvoje','Slušalice su rizik','Zebra i STOP','Romobil nije igračka']]};
+const L='abcde',m=document.getElementById('m'),fmt=n=>n.toLocaleString('hr-HR',{maximumFractionDigits:1});
+async function load(){
+  try{
+    const r=await fetch(SB_URL+'/rest/v1/rpc/dkmj_rezultati',{method:'POST',headers:{apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'},body:'{}'});
+    if(!r.ok)throw 0;const d=await r.json(),N=d.ukupno||0;
+    document.getElementById('tot').firstChild.nodeValue=fmt(N);
+    const avg=k=>{let s=0,c=0;for(const[v,n]of Object.entries(d[k]||{})){s+=v*n;c+=n}return c?fmt(s/c):'–'};
+    document.getElementById('a3').firstChild.nodeValue=avg('q3');document.getElementById('a4').firstChild.nodeValue=avg('q4');
+    const h=((d.q8||{}).a||0)+((d.q8||{}).b||0);document.getElementById('hel').firstChild.nodeValue=N?Math.round(h/N*100)+' %':'–';
+    m.innerHTML=Object.entries(Q).map(([k,[t,o]])=>{const scale=k==='q3'||k==='q4';return `<section class="q"><h2>${t}</h2>`+o.map((lab,j)=>{const key=scale?String(j+1):L[j];const n=(d[k]||{})[key]||0;const p=N?Math.round(n/N*100):0;return `<div class="row"><div class="l"><span>${lab}</span><b>${n} · ${p} %</b></div><div class="bar"><i style="width:${p}%;${k==='q8'&&j>1||k==='q2'&&j>1?'background:#DF494A':''}"></i></div></div>`}).join('')+'</section>'}).join('')+`<section class="q"><h2>Komentari</h2><p style="font:900 32px Unbounded">${fmt(d.komentara||0)}</p><p style="font-size:14px">napisanih komentara (čitaju se u bazi)</p></section>`;
+  }catch(e){m.innerHTML='<p class="err">Rezultati se trenutno ne mogu učitati. Pokušaj ponovno za minutu.</p>'}
+}
+document.getElementById('ref').onclick=load;load();
+}
+</script>
+</body>
+</html>

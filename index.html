@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dva kotača malo jača · Kakav ti je bio đir?</title>
+<meta name="description" content="Anonimni upitnik nakon radionice i poligona Dva kotača malo jača. Traje manje od 2 minute.">
+<meta name="theme-color" content="#1BA990">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--n:#1E1E58;--r:#DF494A;--y:#FAA719;--t:#1BA990;--b:#4756A6;--soft:#F3F2FA}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font:500 17px/1.5 Manrope,system-ui,sans-serif;color:var(--n);background:var(--t);overflow-x:hidden}
+.app{min-height:100dvh;display:flex;flex-direction:column;max-width:560px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+header img{height:66px;transform:rotate(-4deg)}
+.count{font:800 14px Manrope;background:#fff;border:3px solid var(--n);border-radius:99px;padding:6px 12px;white-space:nowrap}
+/* road progress */
+.road{position:relative;height:30px;margin:4px 4px 18px}
+.road .lane{position:absolute;inset:7px 0;background:var(--n);border-radius:99px;box-shadow:0 0 0 4px #fff}
+.road .dash{position:absolute;left:12px;right:12px;top:50%;height:2px;margin-top:-1px;background:repeating-linear-gradient(90deg,var(--y) 0 10px,transparent 10px 18px)}
+.road .sc{position:absolute;top:-10px;width:44px;height:48px;left:0;transition:left .45s cubic-bezier(.3,1.4,.5,1)}
+.card{background:#fff;border-radius:28px;padding:24px 20px 22px;box-shadow:0 8px 0 rgba(30,30,88,.18);flex:1;display:flex;flex-direction:column;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(14px) rotate(.6deg)}to{opacity:1;transform:none}}
+.part{align-self:flex-start;font:800 13px Manrope;background:var(--y);border-radius:99px;padding:5px 12px;margin-bottom:12px;transform:rotate(-2deg)}
+h1,h2{font-family:Unbounded,Manrope,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(28px,8vw,38px);margin-bottom:12px}
+h2{font-size:clamp(21px,5.6vw,26px);margin-bottom:8px}
+.hint{font-size:14px;color:#55557F;margin-bottom:16px;font-weight:700}
+.opts{display:grid;gap:10px;margin-top:6px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:700 16px/1.35 Manrope;color:var(--n);background:var(--soft);border:3px solid transparent;border-radius:18px;padding:14px 14px;min-height:56px;cursor:pointer;transition:transform .12s,background .15s,border-color .15s}
+.opt:active{transform:scale(.98)}
+.opt:focus-visible{outline:3px solid var(--b);outline-offset:3px}
+.opt .mark{flex:none;width:26px;height:26px;border-radius:50%;border:3px solid var(--n);background:#fff;display:grid;place-items:center}
+.multi .opt .mark{border-radius:8px}
+.opt[aria-pressed=true],.opt[aria-checked=true]{background:#fff;border-color:var(--n);box-shadow:0 4px 0 var(--n)}
+.opt[aria-pressed=true] .mark,.opt[aria-checked=true] .mark{background:var(--r)}
+.opt[aria-pressed=true] .mark::after,.opt[aria-checked=true] .mark::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.multi .opt[aria-pressed=true] .mark::after{width:10px;height:6px;border-radius:0;background:none;border:solid #fff;border-width:0 0 3px 3px;transform:rotate(-45deg) translate(1px,-1px)}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.scale button{aspect-ratio:1;border-radius:50%;border:3px solid var(--n);background:#fff;font:900 22px Unbounded;color:var(--n);cursor:pointer;transition:transform .15s,background .15s}
+.scale button[aria-checked=true]{background:var(--r);color:#fff;transform:scale(1.08) rotate(-6deg);box-shadow:0 0 0 4px #fff,0 0 0 7px var(--n)}
+.scale button:focus-visible{outline:3px solid var(--b);outline-offset:4px}
+.ends{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:800;margin-top:12px;color:#55557F}
+.ends span:last-child{text-align:right}
+.mid{font-size:13px;font-weight:800;text-align:center;color:#55557F;margin-top:4px}
+.picked{margin-top:18px;font:800 15px Manrope;min-height:24px;color:var(--r);text-align:center}
+textarea{width:100%;min-height:150px;border:3px solid var(--n);border-radius:18px;padding:14px;font:600 16px/1.5 Manrope;color:var(--n);resize:vertical;margin-top:8px}
+textarea:focus{outline:3px solid var(--y);outline-offset:2px}
+.left{font-size:13px;color:#55557F;text-align:right;margin-top:6px;font-weight:700}
+nav{display:flex;gap:10px;margin-top:auto;padding-top:20px}
+.btn{flex:1;min-height:56px;border-radius:99px;font:900 16px Unbounded;cursor:pointer;border:3px solid var(--n);transition:transform .12s,opacity .2s}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:3px solid var(--y);outline-offset:3px}
+.go{background:var(--n);color:#fff}
+.go:disabled{opacity:.35;cursor:not-allowed}
+.back{flex:0 0 56px;background:#fff;color:var(--n);font-size:20px}
+.go.red{background:var(--r);border-color:var(--r)}
+.hero{position:relative;margin:4px 0 18px;height:140px}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.facts span{font:800 13px Manrope;padding:6px 12px;border-radius:99px;background:var(--soft)}
+.err{background:#fff2f2;border:2px solid var(--r);color:#8a1f20;border-radius:14px;padding:10px 12px;font-size:14px;font-weight:700;margin-top:12px}
+.done{text-align:center;align-items:center;justify-content:center}
+.done h1{margin-top:8px}
+.bolt{display:inline-block;animation:zap 1.2s ease-in-out infinite}
+@keyframes zap{50%{transform:translateY(-6px) rotate(8deg)}}
+.foot{font-size:12px;color:#0f4f44;text-align:center;margin-top:14px;font-weight:700}
+.foot a{color:inherit}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <img src="logo.png" alt="Dva kotača malo jača">
+    <span class="count" id="count" hidden></span>
+  </header>
+  <div class="road" id="road" hidden aria-hidden="true"><div class="lane"></div><div class="dash"></div><svg class="sc" id="sc" viewBox="0 0 220 244"><use href="#scooter"/></svg></div>
+  <main class="card" id="card" aria-live="polite"></main>
+  <p class="foot">Upitnik je anoniman. Ne pitamo ime, školu ni e-mail.</p>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="scooter" viewBox="0 0 220 244"><g stroke="#fff" fill="#fff" stroke-linecap="round"><path d="M165 38L78 140L168 188" stroke-width="38" fill="none" stroke-linejoin="round"/><circle cx="165" cy="38" r="30"/><circle cx="78" cy="140" r="58"/><circle cx="168" cy="188" r="50"/></g><path d="M165 38L78 140L168 188" stroke="#1E1E58" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="165" cy="38" r="16" fill="#1E1E58"/><circle cx="78" cy="140" r="40" fill="#DF494A" stroke="#1E1E58" stroke-width="11"/><path d="M58 120l40 40M98 120l-40 40" stroke="#1E1E58" stroke-width="8" stroke-linecap="round"/><circle cx="78" cy="140" r="11" fill="#1E1E58"/><circle cx="168" cy="188" r="32" fill="#DF494A" stroke="#1E1E58" stroke-width="10"/><path d="M152 172l32 32M184 172l-32 32" stroke="#1E1E58" stroke-width="7" stroke-linecap="round"/><circle cx="168" cy="188" r="9" fill="#1E1E58"/></symbol>
+<symbol id="bolt" viewBox="0 0 40 60"><path d="M24 2L6 34h14l-6 24 22-36H22z" fill="currentColor" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"/></symbol>
+</defs></svg>
+
+<script>
+{
+const SB_URL='https://unszfujweobuseqzfvjr.supabase.co';
+const SB_KEY='sb_publishable_F95tc2G0TRx4M7pOyHdrQg_u0cjvrH2';
+const PARTS={1:'1. dio · Ti i romobil',2:'2. dio · Radionica i poligon',3:'3. dio · Što dalje?'};
+const Q=[
+ {id:'q1',part:1,type:'one',t:'Koliko često inače voziš električni romobil?',o:['Skoro svaki dan – to mi je glavni prijevoz','Povremeno (par puta mjesečno, kad idem s ekipom ili u grad)','Probao/la sam par puta od frendova','Nikad dosad (danas mi je bio prvi put)']},
+ {id:'q2',part:1,type:'one',t:'Iskreno – kakva je dosad bila tvoja situacija s kacigom dok voziš romobil?',o:['Uvijek je na glavi, bez rasprave','Stavim je tu i tamo, ovisno kamo idem','Imam je doma, ali skuplja prašinu','Nemam kacigu niti je nosim']},
+ {id:'q3',part:2,type:'scale',t:'Kakav ti je bio prvi dio (predavanje, primjeri iz prometa i kviz)?',ends:['Teška dosada, jedva sam čekao/la kraj','Top, zanimljivo i bez pametovanja'],mid:'3 = Ok, dalo se poslušati',lab:{1:'Teška dosada',2:'Mah',3:'Ok, dalo se poslušati',4:'Dobro',5:'Top, bez pametovanja'}},
+ {id:'q4',part:2,type:'scale',t:'A kakav ti je bio praktični dio na poligonu (vožnja, čunjevi, mini-igre)?',ends:['Bezveze','Predobro, trebalo bi trajati duže!'],mid:'3 = Solidno',lab:{1:'Bezveze',2:'Može bolje',3:'Solidno',4:'Jako dobro',5:'Predobro, još!'}},
+ {id:'q5',part:2,type:'multi',t:'Koji ti je zadatak ili mini-igra na poligonu bio najbolji?',hint:'Možeš označiti više toga.',o:['Natjecanje u brzom stavljanju opreme','Slalom vožnja i štafeta ravnoteže','Naglo kočenje na znak STOP i zebra','Kviz na početku radionice']},
+ {id:'q6',part:3,type:'one',t:'Jesi li danas saznao/la neko prometno pravilo ili kaznu za koje prije nisi imao/la pojma?',o:['Da, hrpu novih stvari','Da, par detalja koje nisam znao/la','Više-manje sam sve već znao/la']},
+ {id:'q7',part:3,type:'one',t:'Koliko ti je ovaj program promijenio pogled na vožnju e-romobila?',o:['Skroz – tek sad kužim koliko je promet ozbiljan i koliko brzo dođe do sranja','Dosta – pazit ću više na brzinu, slušalice i pravila','Malo – potvrdilo mi je ono što sam već mislio/la','Nimalo – vozit ću isto kao i prije']},
+ {id:'q8',part:3,type:'one',t:'Nakon današnjeg poligona, kolika je šansa da ćeš ubuduće nositi kacigu dok voziš romobil?',o:['Sigurno nosim (100 %)','Najvjerojatnije da, pogotovo na dužim relacijama ili u gužvi','Nisam siguran/na, ali razmislit ću','Teško, i dalje je ne planiram nositi']},
+ {id:'q9',part:3,type:'multi',t:'Koja ti je glavna poruka ostala u glavi nakon danas?',hint:'Možeš označiti više toga.',o:['Kaciga stvarno spašava glavu','Nema vožnje u dvoje na jednom romobilu','Slušalice u ušima u prometu su teški rizik','Na zebri i kod znaka STOP uvijek usporim i provjerim','Romobil nije igračka nego ozbiljno vozilo']},
+ {id:'q10',part:3,type:'text',t:'Imaš li kakav prijedlog ili komentar za nas?',hint:'Što da pojačamo ili dodamo idući put? Nije obavezno, ali rado čitamo!'}
+];
+const L='abcde';
+const A={};let i=-1,sending=false;
+const card=document.getElementById('card'),road=document.getElementById('road'),sc=document.getElementById('sc'),count=document.getElementById('count');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let already=false;try{already=localStorage.getItem('dkmj_poslano')==='1'}catch(e){}
+
+function progress(){
+  const on=i>=0&&i<Q.length;road.hidden=!on;count.hidden=!on;
+  if(on){count.textContent=(i+1)+' / '+Q.length;const w=road.clientWidth-44;sc.style.left=(w*(i/(Q.length-1)))+'px'}
+}
+function answered(q){const v=A[q.id];if(q.type==='multi')return Array.isArray(v)&&v.length>0;if(q.type==='text')return true;return v!=null}
+
+function start(){
+  card.innerHTML=`
+   <div class="hero"><svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice"><path d="M-20 120C60 120 90 60 160 70S270 20 340 30" fill="none" stroke="#fff" stroke-width="44" stroke-linecap="round"/><path d="M-20 120C60 120 90 60 160 70S270 20 340 30" fill="none" stroke="#1E1E58" stroke-width="36" stroke-linecap="round"/><path d="M-20 120C60 120 90 60 160 70S270 20 340 30" fill="none" stroke="#FAA719" stroke-width="3" stroke-dasharray="14 10"/><svg x="130" y="8" width="70" height="78" viewBox="0 0 220 244"><use href="#scooter"/></svg><svg x="232" y="62" width="26" height="40" style="color:#DF494A"><use href="#bolt"/></svg></svg></div>
+   <h1>Reci nam kakav ti je bio đir!</h1>
+   <p>Hej! Hvala što si sudjelovao/la na radionici i poligonu. Treba nam <b>manje od 2 minute</b> tvog vremena da čujemo tvoje iskreno mišljenje.</p>
+   <div class="facts"><span>100 % anonimno</span><span>10 pitanja</span><span>Nema krivih odgovora</span></div>
+   ${already?'<p class="err" style="background:#fff8e6;border-color:#FAA719;color:#1E1E58">Sa ovog uređaja je upitnik već poslan. Ako ga ispunjava netko drugi, slobodno nastavi.</p>':''}
+   <nav><button class="btn go red" id="go">Idemo</button></nav>`;
+  document.getElementById('go').onclick=()=>{i=0;render()};
+  progress();
+}
+
+function render(){
+  const q=Q[i];progress();
+  let body='';
+  if(q.type==='one'||q.type==='multi'){
+    const cur=A[q.id];
+    body=`<div class="opts ${q.type==='multi'?'multi':''}" role="${q.type==='one'?'radiogroup':'group'}" aria-label="${esc(q.t)}">`+q.o.map((o,k)=>{
+      const on=q.type==='multi'?(cur||[]).includes(L[k]):cur===L[k];
+      return `<button class="opt" data-k="${L[k]}" ${q.type==='one'?`role="radio" aria-checked="${on}"`:`aria-pressed="${on}"`}><span class="mark"></span><span>${esc(o)}</span></button>`}).join('')+'</div>';
+  }else if(q.type==='scale'){
+    body=`<div class="scale" role="radiogroup" aria-label="Ocjena od 1 do 5">`+[1,2,3,4,5].map(n=>`<button role="radio" aria-checked="${A[q.id]===n}" data-n="${n}" aria-label="${n}: ${esc(q.lab[n])}">${n}</button>`).join('')+`</div>
+      <div class="ends"><span>1 = ${esc(q.ends[0])}</span><span>5 = ${esc(q.ends[1])}</span></div><p class="mid">${esc(q.mid)}</p>
+      <p class="picked" id="picked">${A[q.id]?esc(q.lab[A[q.id]]):''}</p>`;
+  }else{
+    body=`<label for="ta" class="hint" style="display:block;margin-bottom:0">${esc(q.hint)}</label><textarea id="ta" maxlength="1000" placeholder="Ovdje upiši svoj komentar...">${esc(A[q.id]||'')}</textarea><p class="left" id="left"></p>`;
+  }
+  const last=i===Q.length-1;
+  card.innerHTML=`<span class="part">${PARTS[q.part]}</span><h2>${esc(q.t)}</h2>${q.hint&&q.type!=='text'?`<p class="hint">${esc(q.hint)}</p>`:''}${body}
+    <div id="err"></div>
+    <nav><button class="btn back" id="back" aria-label="Natrag">←</button><button class="btn go ${last?'red':''}" id="next" ${answered(q)?'':'disabled'}>${last?'Pošalji':'Dalje'}</button></nav>`;
+  card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  const next=document.getElementById('next');
+  document.getElementById('back').onclick=()=>{if(i>0){i--;render()}else{i=-1;start()}};
+  next.onclick=()=>{if(!answered(q))return;if(last)send();else{i++;render();window.scrollTo(0,0)}};
+  if(q.type==='one'){card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{A[q.id]=b.dataset.k;card.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-checked',x===b));next.disabled=false;setTimeout(()=>{if(Q[i]===q&&!last){i++;render();window.scrollTo(0,0)}},320)})}
+  if(q.type==='multi'){card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const s=new Set(A[q.id]||[]);s.has(b.dataset.k)?s.delete(b.dataset.k):s.add(b.dataset.k);A[q.id]=[...s].sort();b.setAttribute('aria-pressed',s.has(b.dataset.k));next.disabled=!answered(q)})}
+  if(q.type==='scale'){card.querySelectorAll('.scale button').forEach(b=>b.onclick=()=>{A[q.id]=+b.dataset.n;card.querySelectorAll('.scale button').forEach(x=>x.setAttribute('aria-checked',x===b));document.getElementById('picked').textContent=q.lab[A[q.id]];next.disabled=false})}
+  if(q.type==='text'){const ta=document.getElementById('ta'),left=document.getElementById('left');const u=()=>{A[q.id]=ta.value;left.textContent=(1000-ta.value.length)+' znakova'};ta.oninput=u;u()}
+}
+
+async function send(){
+  if(sending)return;sending=true;
+  const next=document.getElementById('next');next.disabled=true;next.textContent='Šaljem…';
+  const row={};for(const q of Q){let v=A[q.id];if(q.type==='text'){v=(v||'').trim().slice(0,1000)||null}row[q.id]=v??null}
+  try{
+    const r=await fetch(SB_URL+'/rest/v1/dkmj_odgovori',{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)});
+    if(!r.ok)throw new Error(r.status);
+    try{localStorage.setItem('dkmj_poslano','1')}catch(e){}
+    done();
+  }catch(e){
+    sending=false;next.disabled=false;next.textContent='Pošalji';
+    document.getElementById('err').innerHTML='<p class="err">Ups, odgovor nije stigao do nas. Provjeri internet i stisni Pošalji još jednom.</p>';
+  }
+}
+
+function done(){
+  i=Q.length;progress();
+  card.classList.add('done');
+  card.innerHTML=`<svg width="120" height="134" viewBox="0 0 220 244"><use href="#scooter"/></svg>
+   <h1>Hvala ti na iskrenosti!</h1>
+   <p style="max-width:30ch">Vozi pametno, čuvaj glavu i vidimo se na cesti!</p>
+   <p style="margin-top:14px"><span class="bolt" style="color:#FAA719"><svg width="30" height="45"><use href="#bolt"/></svg></span></p>
+   <p class="hint" style="margin-top:10px">Prati nas na <b>@dvakotacamalojaca</b></p>`;
+}
+window.addEventListener('resize',progress);
+start();
+}
+</script>
+</body>
+</html>
