@@ -1,0 +1,20 @@
+name: Drži bazu budnom
+# Besplatni Supabase projekt pauzira se nakon 7 dana bez aktivnosti.
+# Ovaj zadatak svaka 3 dana pita bazu za zbirne rezultate i tako je drži aktivnom.
+on:
+  schedule:
+    - cron: "17 6 */3 * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "https://unszfujweobuseqzfvjr.supabase.co/rest/v1/rpc/dkmj_rezultati" \
+            -H "apikey: sb_publishable_F95tc2G0TRx4M7pOyHdrQg_u0cjvrH2" \
+            -H "Authorization: Bearer sb_publishable_F95tc2G0TRx4M7pOyHdrQg_u0cjvrH2" \
+            -H "Content-Type: application/json" -d '{}')
+          echo "Supabase odgovor: $code"
+          test "$code" = "200"
