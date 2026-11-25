@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Tajni Djed Mraz 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--green:#0f3d2e;--green2:#165a43;--red:#c0392b;--red2:#e24b3b;--gold:#f2c46d;--cream:#fff8ec;--ink:#1d2b26}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{font-family:Nunito,system-ui,sans-serif;color:var(--cream);
+    background:radial-gradient(120% 80% at 50% 0%,#1c6b50 0%,var(--green) 55%,#082219 100%) fixed;
+    display:flex;justify-content:center;padding:28px 16px 48px;overflow-x:hidden}
+  #snow{position:fixed;inset:0;pointer-events:none;z-index:0}
+  main{position:relative;z-index:1;width:100%;max-width:460px;text-align:center}
+  .lights{display:flex;justify-content:space-around;margin:-6px 0 14px}
+  .lights i{width:12px;height:16px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:tw 1.6s infinite alternate}
+  .lights i:nth-child(3n+1){background:var(--red2);box-shadow:0 0 12px var(--red2)}
+  .lights i:nth-child(3n+2){background:var(--gold);box-shadow:0 0 12px var(--gold);animation-delay:.5s}
+  .lights i:nth-child(3n){background:#7fd6ff;box-shadow:0 0 12px #7fd6ff;animation-delay:1s}
+  @keyframes tw{from{opacity:.35}to{opacity:1}}
+  h1{font-family:"Mountains of Christmas",cursive;font-size:clamp(40px,12vw,56px);line-height:1;margin:6px 0 6px;color:var(--gold);text-shadow:0 3px 0 rgba(0,0,0,.25)}
+  .sub{margin:0 0 20px;opacity:.9;font-size:17px}
+  .card{background:var(--cream);color:var(--ink);border-radius:22px;padding:22px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35);border:3px solid var(--gold)}
+  .card h2{margin:0 0 4px;font-size:21px;font-weight:800}
+  .hint{margin:0 0 16px;font-size:14.5px;color:#55655f}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .grid button{font:800 16px Nunito,sans-serif;padding:16px 4px;border-radius:14px;border:0;cursor:pointer;color:#fff;
+    background:linear-gradient(180deg,var(--red2),var(--red));box-shadow:0 4px 0 #8e2a20;transition:transform .08s,box-shadow .08s}
+  .grid button:active{transform:translateY(3px);box-shadow:0 1px 0 #8e2a20}
+  .grid button[disabled]{background:#d9d3c6;color:#8b8679;box-shadow:none;cursor:not-allowed;text-decoration:line-through}
+  .grid button small{display:block;font-weight:700;font-size:11px;text-decoration:none;margin-top:2px}
+  .count{margin:16px 0 0;font-size:14px;color:#55655f;font-weight:700}
+  .bar{height:8px;border-radius:8px;background:#e9e1d0;margin-top:8px;overflow:hidden}
+  .bar b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green2),#2fa37a);transition:width .5s}
+  .msg{margin:14px 0 0;padding:10px 12px;border-radius:12px;background:#fde3df;color:#8e2a20;font-weight:700;font-size:14.5px}
+  .gift{font-size:64px;line-height:1;margin:4px 0 8px;display:inline-block;animation:pop .7s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes pop{from{transform:scale(.2) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+  .who{font-size:15px;color:#55655f;margin:0}
+  .name{font-family:"Mountains of Christmas",cursive;font-size:clamp(46px,15vw,64px);color:var(--red);margin:6px 0 10px;line-height:1.05}
+  .name.hidden{filter:blur(16px);user-select:none}
+  .btn{font:800 16px Nunito,sans-serif;border:0;border-radius:14px;padding:14px 20px;cursor:pointer}
+  .btn.primary{background:var(--green2);color:#fff;box-shadow:0 4px 0 #0b3023}
+  .btn.ghost{background:#efe8d8;color:var(--ink)}
+  .note{font-size:13.5px;color:#55655f;margin:14px 0 0}
+  .overlay{position:fixed;inset:0;background:rgba(4,20,14,.72);display:flex;align-items:center;justify-content:center;padding:20px;z-index:5}
+  .overlay .card{max-width:380px;width:100%}
+  .row{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+  footer{margin-top:22px;font-size:13px;opacity:.7}
+  [hidden]{display:none!important}
+  @media (prefers-reduced-motion:reduce){.lights i,.gift{animation:none}#snow{display:none}}
+</style>
+</head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+<main>
+  <div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <h1>Tajni Djed Mraz</h1>
+  <p class="sub">🎄 Obiteljsko izvlačenje 2026. 🎁</p>
+
+  <section class="card" id="pick">
+    <h2>Tko si ti?</h2>
+    <p class="hint">Dodirni svoje ime i saznaj koga daruješ. Pssst, nikome ni riječi!</p>
+    <div class="grid" id="grid"></div>
+    <p class="count" id="count">Učitavam…</p>
+    <div class="bar"><b id="bar"></b></div>
+    <p class="msg" id="msg" hidden role="alert"></p>
+  </section>
+
+  <section class="card" id="result" hidden>
+    <span class="gift" aria-hidden="true">🎁</span>
+    <p class="who"><b id="me"></b>, ti daruješ:</p>
+    <div class="name hidden" id="target"></div>
+    <button class="btn primary" id="toggle">Pokaži ime</button>
+    <p class="note">Ime možeš ponovno pogledati samo s ovog uređaja. Sakrij ga prije nego netko proviri. 🤫</p>
+    <p class="count" id="count2"></p>
+  </section>
+
+  <footer>Sretan Božić! ✨</footer>
+</main>
+
+<div class="overlay" id="confirm" hidden>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="cq">
+    <h2 id="cq"></h2>
+    <p class="hint" style="margin-bottom:0">Kad potvrdiš, nema natrag: s ovog uređaja više se ne može izvlačiti za nekog drugog.</p>
+    <div class="row">
+      <button class="btn ghost" id="no">Nisam, natrag</button>
+      <button class="btn primary" id="yes">Da, izvuci! 🎅</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const URL_ = "https://unszfujweobuseqzfvjr.supabase.co/rest/v1/rpc/";
+const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuc3pmdWp3ZW9idXNlcXpmdmpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNjQ0MDIsImV4cCI6MjEwMzk0MDQwMn0.EpKNs3AGSqKAgpH-te0t6RkGrB2hwvI73KkdlQZv0Ao";
+const $ = id => document.getElementById(id);
+const store = {
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+};
+let token = store.get("santa_token");
+if(!token){
+  token = (crypto.randomUUID ? crypto.randomUUID() : Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,"0")).join("")) + "-" + Date.now();
+  store.set("santa_token", token);
+}
+let myName = store.get("santa_me"), pending = null, busy = false;
+
+async function rpc(fn, body){
+  const r = await fetch(URL_ + fn, {method:"POST", headers:{apikey:KEY, Authorization:"Bearer "+KEY, "Content-Type":"application/json"}, body:JSON.stringify(body||{})});
+  const j = await r.json().catch(()=>null);
+  if(!r.ok) throw new Error((j && j.message) || "greska");
+  return j;
+}
+function showMsg(t){ $("msg").textContent = t; $("msg").hidden = !t; }
+
+function render(list){
+  const done = list.filter(x=>x.izvuceno).length;
+  const txt = done === list.length ? "Svi su izvukli! 🎉" : "Izvučeno: " + done + " od " + list.length;
+  $("count").textContent = txt; $("count2").textContent = txt;
+  $("bar").style.width = (list.length ? done/list.length*100 : 0) + "%";
+  const g = $("grid"); g.textContent = "";
+  list.forEach(x=>{
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = x.ime;
+    if(x.izvuceno){ b.disabled = true; const s = document.createElement("small"); s.textContent = "izvučeno ✓"; b.appendChild(s); }
+    else b.onclick = () => ask(x.ime);
+    g.appendChild(b);
+  });
+}
+async function refresh(){
+  try{ render(await rpc("santa_status")); }
+  catch(e){ if(!$("grid").children.length) $("count").textContent = "Ne mogu se spojiti. Provjeri internet i osvježi stranicu."; }
+}
+function ask(ime){ pending = ime; $("cq").textContent = "Ti si " + ime + "?"; $("confirm").hidden = false; $("yes").focus(); }
+$("no").onclick = () => { $("confirm").hidden = true; pending = null; };
+$("yes").onclick = async () => {
+  if(busy || !pending) return; busy = true; $("yes").textContent = "Izvlačim…";
+  const ime = pending;
+  try{ reveal(ime, await rpc("santa_izvuci", {p_ime:ime, p_token:token}), false); }
+  catch(e){
+    showMsg(e.message === "zauzeto" ? "Ups! Netko je već izvukao kao " + ime + ". Ako si to stvarno ti, javi Rafaelu."
+      : e.message === "vec_izvukao" ? "S ovog uređaja je već izvučeno za nekog drugog."
+      : "Nešto je pošlo po zlu. Pokušaj ponovno.");
+    refresh();
+  }
+  busy = false; pending = null; $("confirm").hidden = true; $("yes").textContent = "Da, izvuci! 🎅";
+};
+function reveal(ime, prima, hidden){
+  myName = ime; store.set("santa_me", ime);
+  $("me").textContent = ime; $("target").textContent = prima;
+  $("pick").hidden = true; $("result").hidden = false;
+  setHidden(hidden); refresh();
+}
+function setHidden(h){ $("target").classList.toggle("hidden", h); $("toggle").textContent = h ? "Pokaži ime" : "Sakrij ime"; }
+$("toggle").onclick = () => setHidden(!$("target").classList.contains("hidden"));
+
+(async function init(){
+  if(myName){
+    try{ reveal(myName, await rpc("santa_izvuci", {p_ime:myName, p_token:token}), true); }
+    catch(e){ myName = null; store.set("santa_me", ""); }
+  }
+  refresh(); setInterval(refresh, 4000);
+  document.addEventListener("visibilitychange", () => { if(!document.hidden) refresh(); });
+})();
+
+// snijeg
+(function(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const c = $("snow"), x = c.getContext("2d"); let w, h, f = [];
+  function size(){ w = c.width = innerWidth; h = c.height = innerHeight; }
+  size(); addEventListener("resize", size);
+  for(let i=0;i<70;i++) f.push({x:Math.random()*w, y:Math.random()*h, r:1+Math.random()*2.6, s:.3+Math.random()*.9, d:Math.random()*6.28});
+  (function tick(){
+    x.clearRect(0,0,w,h); x.fillStyle = "rgba(255,255,255,.85)";
+    for(const p of f){ p.y += p.s; p.d += .01; p.x += Math.sin(p.d)*.4; if(p.y > h+4){ p.y = -4; p.x = Math.random()*w; }
+      x.beginPath(); x.arc(p.x,p.y,p.r,0,6.28); x.fill(); }
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+</body>
+</html>
